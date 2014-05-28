@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="TicTakToeGame.UserControls.PlayingField"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:TicTakToeGame.ViewModels"
+             xmlns:uc="clr-namespace:TicTakToeGame.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.Resources>
+            <DataTemplate x:Key="Toe">
+                <Button>
+                    <Image Source="\Images\Toe.png"></Image>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="Cross">
+                <Button>
+                    <Image Source="\Images\Cross.png"></Image>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="ToeWinner">
+                <Button>
+                    <Image Source="\Images\ToeWinner.png"></Image>
+                </Button>
+            </DataTemplate>
+            <DataTemplate x:Key="CrossWinner">
+                <Button>
+                    <Image Source="\Images\CrossWinner.png"></Image>
+                </Button>
+            </DataTemplate>
+
+            <DataTemplate x:Key="Default">
+                <Button Command="{Binding UserStepAction}" CommandParameter="{Binding Path=DataContext, RelativeSource={RelativeSource Self}}"/>
+            </DataTemplate>
+            
+            <uc:TemplateSelector x:Key="FieldTemplateSelector"></uc:TemplateSelector>
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="White"></Setter>
+                <Setter Property="BorderBrush" Value="White"></Setter>
+            </Style>
+            
+            <Style TargetType="Rectangle">
+                <Setter Property="RadiusX" Value="6"/>
+                <Setter Property="RadiusY" Value="6"/>
+                <Setter Property="Fill" Value="CornflowerBlue"/>
+            </Style>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="5px"/>
+            <RowDefinition/>
+            <RowDefinition Height="5px"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>      
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5px"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5px"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="0" 
+                          Grid.Column="0" 
+                          Content="{Binding Cells[0]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="0" 
+                          Grid.Column="2" 
+                          Content="{Binding Cells[1]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="0" 
+                          Grid.Column="4" 
+                          Content="{Binding Cells[2]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="2" 
+                          Grid.Column="0" 
+                          Content="{Binding Cells[3]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="2" 
+                          Grid.Column="2" 
+                          Content="{Binding Cells[4]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="2" 
+                          Grid.Column="4" 
+                          Content="{Binding Cells[5]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="4" 
+                          Grid.Column="0" 
+                          Content="{Binding Cells[6]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="4" 
+                          Grid.Column="2" 
+                          Content="{Binding Cells[7]}"/>
+        <ContentPresenter ContentTemplateSelector="{StaticResource FieldTemplateSelector}" 
+                          Grid.Row="4" 
+                          Grid.Column="4" 
+                          Content="{Binding Cells[8]}"/>
+
+        <Rectangle Grid.Column="1" Grid.RowSpan="5"/>
+        <Rectangle Grid.Column="3" Grid.RowSpan="5"/>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="5"/>
+        <Rectangle Grid.Row="3" Grid.ColumnSpan="5"/>
+    </Grid>
+</UserControl>
