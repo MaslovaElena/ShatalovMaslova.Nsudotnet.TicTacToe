@@ -1,0 +1,78 @@
+﻿<Window x:Class="TicTakToeGame.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:uc="clr-namespace:TicTakToeGame.UserControls"
+        xmlns:vc="clr-namespace:TicTakToeGame.VlaueConverters"
+        Title="Tic Tak Toe Game" Height="565" Width="525"
+        Icon="./Images/Cross.png"
+        >
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="Rectangle">
+                <Setter Property="RadiusX" Value="6"/>
+                <Setter Property="RadiusY" Value="6"/>
+                <Setter Property="Fill" Value="CornflowerBlue"/>
+            </Style>
+            
+            <Style TargetType="uc:PlayingField">
+                <Setter Property="Margin" Value="10"></Setter>
+            </Style>
+            
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="15px"/>
+                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                <Setter Property="Margin" Value="2px"></Setter>
+            </Style>
+            
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="15px"/>
+                <Setter Property="Margin" Value="3"/>
+            </Style>
+            <vc:PlayerValueConverter x:Key="playerValueConverter"></vc:PlayerValueConverter>
+        </Grid.Resources>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40px"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding StartGameCommand}">Старт</Button>
+            <TextBlock Text="Текущий игрок:"></TextBlock>
+            <TextBlock x:Name="CurrentUser"
+                       Text="{Binding CurrentPlayer, Converter={StaticResource playerValueConverter}}"/>
+        </StackPanel>
+        
+        <Grid Grid.Row="1" Margin="10px">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="10px"/>
+                <RowDefinition/>
+                <RowDefinition Height="10px"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10px"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10px"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        
+            <uc:PlayingField DataContext="{Binding GameFields[0]}" Grid.Row="0" Grid.Column="0"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[1]}" Grid.Row="0" Grid.Column="2"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[2]}" Grid.Row="0" Grid.Column="4"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[3]}" Grid.Row="2" Grid.Column="0"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[4]}" Grid.Row="2" Grid.Column="2"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[5]}" Grid.Row="2" Grid.Column="4"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[6]}" Grid.Row="4" Grid.Column="0"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[7]}" Grid.Row="4" Grid.Column="2"></uc:PlayingField>
+            <uc:PlayingField DataContext="{Binding GameFields[8]}" Grid.Row="4" Grid.Column="4"></uc:PlayingField>
+
+            <Rectangle Grid.Column="1" Grid.RowSpan="5"/>
+            <Rectangle Grid.Column="3" Grid.RowSpan="5"/>
+            <Rectangle Grid.Row="1" Grid.ColumnSpan="5"/>
+            <Rectangle Grid.Row="3" Grid.ColumnSpan="5"/>
+        </Grid>
+    </Grid>
+</Window>
